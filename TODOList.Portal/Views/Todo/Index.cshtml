@@ -122,15 +122,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.8.1/sweetalert2.all.min.js"></script>
 
-
-
-
     <script>
         $(document).ready(function () {
 
             bindDatatable();
 
-            // DatePicker
+            // DatePicker config
             var new_options = {
                 orientation: "right",
                 autoclose: true,
@@ -138,6 +135,7 @@
                 endDate: new Date()
             }
 
+            // DatePicker config to create view
             $('#DueDate').datepicker(new_options);
             var Today = new Date();
             var dd = Today.getDate();
@@ -151,7 +149,6 @@
             }
             Today = dd + '/' + mm + '/' + yyyy;
 
-
             $("#DueDate").change(function () {
                 if ($('#DueDate').val() != "" && $('#DueDate').val() != null) {
                     $("#DueDate").val($('#DueDate').val().split('/')[1] + '/' + $('#DueDate').val().split('/')[0] + '/' + $('#DueDate').val().split('/')[2]);
@@ -159,6 +156,7 @@
             })
 
 
+            // DatePicker config to edit view
             $('#DueDateEdit').datepicker(new_options);
             var Today = new Date();
             var dd = Today.getDate();
@@ -172,7 +170,6 @@
             }
             Today = dd + '/' + mm + '/' + yyyy;
 
-
             $("#DueDateEdit").change(function () {
                 if ($('#DueDateEdit').val() != "" && $('#DueDateEdit').val() != null) {
                     $("#DueDateEdit").val($('#DueDateEdit').val().split('/')[1] + '/' + $('#DueDateEdit').val().split('/')[0] + '/' + $('#DueDateEdit').val().split('/')[2]);
@@ -181,7 +178,7 @@
 
 
 
-
+            // Click Edit Button // open edit modal & Bind Data
             $('#toDoTable tbody').on('click', 'button.EditToDo', function () {
 
                 var table = $('#toDoTable').DataTable();
@@ -189,7 +186,7 @@
                 ShowEditModal(data);
             });
 
-
+            // Click Delete Button // open sweetalert 
             $('#toDoTable tbody').on('click', 'button.DeleteToDo', function () {
                 var table = $('#toDoTable').DataTable();
                 var data = table.row($(this).parents('tr')).data();
@@ -234,6 +231,7 @@
                 })
             });
 
+             // Click Markdone Button // change row color to green & hide edit and mark buttons
             $('#toDoTable tbody').on('click', 'button.MarkDone', function () {
 
                 var table = $('#toDoTable').DataTable();
@@ -244,35 +242,17 @@
 
             });
 
-            function hideButtons() {
-
-                $('#toDoTable tbody').on('click', 'button.EditToDo', function () {
-
-                    var table = $('#toDoTable').DataTable();
-
-                    table.row($('button.EditToDo').hide());
-
-                });
-
-
-                $('#toDoTable tbody').on('click', 'button.MarkToDo', function () {
-
-                    var table = $('#toDoTable').DataTable();
-
-                    table.row($(this).hide());
-
-                });
-
-            }
 
         });
 
+        //show create modal function
         function ShowCreateModal() {
 
             $('#CreateToDoItemModel').modal('show');
 
         }
 
+        //bind data to datatable
         function bindDatatable() {
             datatable = $('#toDoTable')
                 .DataTable({
@@ -302,6 +282,7 @@
                 });
         }
 
+        //show edit modal function 
         function ShowEditModal(data) {
 
             $('#EditToDoItemModel').modal('show');

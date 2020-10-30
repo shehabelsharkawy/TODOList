@@ -18,12 +18,13 @@ namespace TODOList.Portal.Controllers
     {
         private TODOListEntities db = new TODOListEntities();
 
-        // GET: Todo
+        // GET: Todo Index
         public ActionResult Index()
         {
             return View();
         }
 
+        // get JSON data to bind in datatable
         public ActionResult GetData(JqueryDatatableParam param)
         {
             var userId = User.Identity.GetUserId();
@@ -107,7 +108,7 @@ namespace TODOList.Portal.Controllers
             return View(todo);
         }
 
-   
+        // POST: Todo/Delete/5
         [HttpPost]
         public ActionResult ConfirmDelete(int? id)
         {
